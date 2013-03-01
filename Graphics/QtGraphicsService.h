@@ -3,7 +3,7 @@
 
 #include "main/avocado-global.h"
 
-#include "SPI/Abstract/Graphics/GraphicsService.h"
+#include "main/Graphics/GraphicsService.h"
 
 namespace avo {
 

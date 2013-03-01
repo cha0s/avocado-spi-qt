@@ -5,7 +5,7 @@
 
 #include <QtCore/QTime>
 
-#include "SPI/Abstract/Timing/Counter.h"
+#include "main/Timing/Counter.h"
 
 namespace avo {
 

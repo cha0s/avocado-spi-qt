@@ -1,6 +1,6 @@
 TARGET = CoreService-qt
 
-include(../../Abstract/Core/Core.pri)
+include(../../../main/Core/Core.pri)
 
 CONFIG += qt
 

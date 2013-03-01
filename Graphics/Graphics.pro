@@ -1,6 +1,6 @@
 TARGET = GraphicsService-qt
 
-include(../../Abstract/Graphics/Graphics.pri)
+include(../../../main/Graphics/Graphics.pri)
 
 CONFIG += qt
 

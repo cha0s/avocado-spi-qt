@@ -9,7 +9,7 @@
 #include <QtGui/QSlider>
 
 #include "main/FS.h"
-#include "SPI/Abstract/Graphics/Image.h"
+#include "main/Graphics/Image.h"
 
 namespace avo {
 
