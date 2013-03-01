@@ -1,6 +1,6 @@
 TARGET = TimingService-qt
 
-include(../../../main/Timing/Timing.pri)
+include(../../../core/Timing/Timing.pri)
 
 CONFIG += qt
 

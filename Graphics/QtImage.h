@@ -1,15 +1,15 @@
 #ifndef AVOCADO_QTIMAGE_H
 #define AVOCADO_QTIMAGE_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
 #include <QtGui/QImage>
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QSlider>
 
-#include "main/FS.h"
-#include "main/Graphics/Image.h"
+#include "core/FS.h"
+#include "core/Graphics/Image.h"
 
 namespace avo {
 

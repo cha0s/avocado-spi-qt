@@ -1,9 +1,9 @@
 #ifndef AVOCADO_QTGRAPHICSSERVICE_H
 #define AVOCADO_QTGRAPHICSSERVICE_H
 
-#include "main/avocado-global.h"
+#include "core/avocado-global.h"
 
-#include "main/Graphics/GraphicsService.h"
+#include "core/Graphics/GraphicsService.h"
 
 namespace avo {
 
