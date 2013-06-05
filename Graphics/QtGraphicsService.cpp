@@ -3,6 +3,7 @@
 #include "QtGraphicsService.h"
 
 #include "QtImage.h"
+#include "QtSprite.h"
 
 namespace avo {
 
@@ -11,6 +12,7 @@ AbstractFactory<QtGraphicsService> *QtGraphicsService::factory = new AbstractFac
 QtGraphicsService::QtGraphicsService() {
 
 	Image::factoryManager.setInstance(QtImage::factory);
+	Sprite::factoryManager.setInstance(QtSprite::factory);
 }
 
 QtGraphicsService::~QtGraphicsService() {

@@ -8,10 +8,10 @@ SOURCES += \
 	\
 	QtGraphicsService.cpp \
 	\
-	QtCanvas.cpp QtImage.cpp
+	QtCanvas.cpp QtImage.cpp QtSprite.cpp
 
 HEADERS += \
 	\
 	QtGraphicsService.h \
 	\
-	QtCanvas.h QtImage.h
+	QtCanvas.h QtImage.h QtSprite.h

@@ -10,6 +10,7 @@
 
 #include "core/FS.h"
 #include "core/Graphics/Canvas.h"
+#include "core/Graphics/GraphicsService.h"
 
 namespace avo {
 
@@ -19,17 +20,14 @@ namespace avo {
  */
 
 /**
- * Qt image SPI implementation (SPII). The SPII uses QImage to implement the
+ * Qt Canvas SPI implementation (SPII). The SPII uses QImage to implement the
  * image operations.
  *
  * @ingroup Qt
- * @ingroup Resources
  */
 class QtCanvas : public Canvas {
 
 public:
-
-	friend class QtImage;
 
 	/**
 	 * Build a NULL QCanvas.
@@ -51,23 +49,19 @@ public:
 	 */
 	~QtCanvas();
 
-	void drawCircle(int x, int y, int radius, int r, int g, int b, int a = 255, DrawMode drawMode = DrawMode_Blend);
+	void drawCircle(int x, int y, int radius, int r, int g, int b, int a = 255, GraphicsService::BlendMode blendMode = GraphicsService::BlendMode_Blend);
 
-	void drawFilledBox(int x, int y, int w, int h, int r, int g, int b, int a = 255, DrawMode drawMode = DrawMode_Blend);
+	void drawFilledBox(int x, int y, int w, int h, int r, int g, int b, int a = 255, GraphicsService::BlendMode blendMode = GraphicsService::BlendMode_Blend);
 
-	void drawLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a = 255, DrawMode drawMode = DrawMode_Blend);
+	void drawLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a = 255, GraphicsService::BlendMode blendMode = GraphicsService::BlendMode_Blend);
 
-	void drawLineBox(int x, int y, int w, int h, int r, int g, int b, int a = 255, DrawMode drawMode = DrawMode_Blend);
+	void drawLineBox(int x, int y, int w, int h, int r, int g, int b, int a = 255, GraphicsService::BlendMode blendMode = GraphicsService::BlendMode_Blend);
 
 	void fill(int r, int g, int b, int a = 255);
 
 	int height() const;
 
-	bool isValid() const { return width() != 0 && height() != 0; }
-
 	unsigned int pixelAt(int x, int y) const;
-
-	void render(int x, int y, Canvas *destination, int alpha = 255, DrawMode mode = DrawMode_Blend, int sx = 0, int sy = 0, int sw = 0, int sh = 0) const AVOCADO_ENSURE_STACK_ALIGNED_FOR_SSE;
 
 	void saveToFile(const boost::filesystem::path &filename);
 
@@ -75,18 +69,22 @@ public:
 
 	int width() const;
 
+	/**
+	 * Get the image.
+	 */
+	QImage *qImage() const;
+
 	static AbstractFactory<QtCanvas> *factory;
 
 private:
 
-	QImage *qImage;
+	QImage *_qImage;
 
 };
 
 /**
  * @ingroup Manufacturing
  * @ingroup Qt
- * @ingroup Resources
  * @ingroup SPI
  */
 template <>

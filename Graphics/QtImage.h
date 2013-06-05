@@ -20,7 +20,7 @@ namespace avo {
  */
 
 /**
- * Qt image SPI implementation (SPII). The SPII uses QImage to implement the
+ * Qt image SPI implementation (SPII). The SPII uses QPixmap to implement the
  * image operations.
  *
  * @ingroup Qt
@@ -31,31 +31,34 @@ class QtImage : public Image {
 public:
 
 	/**
-	 * Build a NULL QImage.
+	 * Build a NULL QPixmap.
 	 */
 	QtImage();
 
 	/**
-	 * Load a QImage from a filename.
+	 * Load a QPixmap from a filename.
 	 */
 	QtImage(const boost::filesystem::path &uri);
 
 	/**
-	 * Destroy QImage.
+	 * Destroy QPixmap.
 	 */
 	~QtImage();
 
 	int height() const;
 
-	void render(int x, int y, Canvas *destination, int alpha = 255, DrawMode mode = DrawMode_Blend, int sx = 0, int sy = 0, int sw = 0, int sh = 0) const AVOCADO_ENSURE_STACK_ALIGNED_FOR_SSE;
-
 	int width() const;
+
+	/**
+	 * Get the pixmap.
+	 */
+	QPixmap *qPixmap() const;
 
 	static AbstractFactory<QtImage> *factory;
 
 private:
 
-	QPixmap *qPixmap;
+	QPixmap *_qPixmap;
 
 };
 

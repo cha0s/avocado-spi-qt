@@ -7,30 +7,18 @@ namespace avo {
 
 AbstractFactory<QtImage> *QtImage::factory = new AbstractFactory<QtImage>;
 
-QPainter::CompositionMode mapCompositionMode(Image::DrawMode drawMode) {
-
-	switch (drawMode) {
-	default:
-	case Image::DrawMode_Blend:
-		return QPainter::CompositionMode_SourceOver;
-
-	case Image::DrawMode_Replace:
-		return QPainter::CompositionMode_Source;
-	}
-}
-
 QtImage::QtImage()
 	: Image()
-	, qPixmap(NULL)
+	, _qPixmap(NULL)
 {
 }
 
 QtImage::QtImage(const boost::filesystem::path &uri)
 	: Image()
 {
-	qPixmap = new QPixmap(QString::fromStdString(uri.string()));
+	_qPixmap = new QPixmap(QString::fromStdString(uri.string()));
 
-	if (!qPixmap || qPixmap->isNull()) throw std::runtime_error(
+	if (!_qPixmap || _qPixmap->isNull()) throw std::runtime_error(
 		"Qt couldn't load the image."
 	);
 
@@ -38,44 +26,23 @@ QtImage::QtImage(const boost::filesystem::path &uri)
 }
 
 QtImage::~QtImage() {
-	if (qPixmap) delete qPixmap;
+	if (_qPixmap) delete _qPixmap;
 }
 
 int QtImage::height() const {
-	if (NULL == qPixmap) return 0;
+	if (NULL == _qPixmap) return 0;
 
-	return qPixmap->height();
-}
-
-void QtImage::render(int x, int y, Canvas *destination, int alpha, DrawMode mode, int sx, int sy, int sw, int sh) const {
-	if (NULL == qPixmap) return;
-
-	QPainter painter(Canvas::superCast<QtCanvas>(destination)->qImage);
-
-	if (DrawMode_Blend == mode) painter.setOpacity((float)alpha / 255);
-
-	// Translate the rendering mode to Qt's composition mode.
-	painter.setCompositionMode(mapCompositionMode(mode));
-
-	// If src_rect doesn't have a valid width or height, set them
-	// to this Image object's dimensions. Not sure if Qt needs this
-	// actually...
-	if (0 == sw || 0 == sh) {
-		sw = width();
-		sh = height();
-	}
-
-	painter.drawPixmap(
-		QPoint(x, y),
-		*qPixmap,
-		QRect(sx, sy, sw, sh)
-	);
+	return _qPixmap->height();
 }
 
 int QtImage::width() const {
-	if (NULL == qPixmap) return 0;
+	if (NULL == _qPixmap) return 0;
 
-	return qPixmap->width();
+	return _qPixmap->width();
+}
+
+QPixmap *QtImage::qPixmap() const {
+	return _qPixmap;
 }
 
 }
