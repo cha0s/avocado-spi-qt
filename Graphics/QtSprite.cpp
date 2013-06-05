@@ -6,6 +6,8 @@
 
 namespace avo {
 
+AbstractFactory<QtSprite> *QtSprite::factory = new AbstractFactory<QtSprite>;
+
 QtSprite::QtSprite()
 	: Sprite()
 	, alpha(1)

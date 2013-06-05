@@ -51,6 +51,8 @@ public:
 
 	void setSourceRectangle(int x, int y, int w, int h);
 
+	static AbstractFactory<QtSprite> *factory;
+
 private:
 
 	double alpha;
