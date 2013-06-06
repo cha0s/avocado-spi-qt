@@ -14,6 +14,9 @@ QtSprite::QtSprite()
 	, blendMode(GraphicsService::BlendMode_Blend)
 	, x(0)
 	, y(0)
+	, angle(0)
+	, orientX(0)
+	, orientY(0)
 	, factorX(1)
 	, factorY(1)
 	, sourceX(0)
@@ -93,8 +96,10 @@ void QtSprite::setPosition(int x, int y) {
 	this->y = y;
 }
 
-void QtSprite::setRotation(double angle) {
+void QtSprite::setRotation(double angle, int orientX, int orientY) {
 	this->angle = angle;
+	this->orientX = orientX;
+	this->orientY = orientY;
 }
 
 void QtSprite::setScale(double factorX, double factorY) {
