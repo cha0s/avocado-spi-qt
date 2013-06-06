@@ -46,7 +46,7 @@ QtCanvas::~QtCanvas() {
 	if (_qImage) delete _qImage;
 }
 
-void QtCanvas::drawCircle(int x, int y, int radius, int r, int g, int b, int a, GraphicsService::BlendMode blendMode) {
+void QtCanvas::drawCircle(int x, int y, int radius, int r, int g, int b, double a, GraphicsService::BlendMode blendMode) {
 	if (NULL == _qImage) return;
 
 	QPainter painter(_qImage);
@@ -54,11 +54,11 @@ void QtCanvas::drawCircle(int x, int y, int radius, int r, int g, int b, int a, 
 	// Translate the rendering mode to Qt's composition mode.
 	painter.setCompositionMode(mapCompositionMode(blendMode));
 
-	painter.setPen(QPen(QColor(r, g, b, a)));
+	painter.setPen(QPen(QColor(r, g, b, a * 255.0)));
 	painter.drawEllipse(QRect(x, y, radius * 2, radius * 2));
 }
 
-void QtCanvas::drawFilledBox(int x, int y, int w, int h, int r, int g, int b, int a, GraphicsService::BlendMode blendMode) {
+void QtCanvas::drawFilledBox(int x, int y, int w, int h, int r, int g, int b, double a, GraphicsService::BlendMode blendMode) {
 	if (NULL == _qImage) return;
 
 	QPainter painter(_qImage);
@@ -66,10 +66,10 @@ void QtCanvas::drawFilledBox(int x, int y, int w, int h, int r, int g, int b, in
 	// Translate the rendering mode to Qt's composition mode.
 	painter.setCompositionMode(mapCompositionMode(blendMode));
 
-	painter.fillRect(QRect(x, y, w, h), QColor(r, g, b, a));
+	painter.fillRect(QRect(x, y, w, h), QColor(r, g, b, a * 255.0));
 }
 
-void QtCanvas::drawLine(int x1, int y1, int x2, int y2, int r, int g, int b, int a, GraphicsService::BlendMode blendMode) {
+void QtCanvas::drawLine(int x1, int y1, int x2, int y2, int r, int g, int b, double a, GraphicsService::BlendMode blendMode) {
 	if (NULL == _qImage) return;
 
 	QPainter painter(_qImage);
@@ -77,11 +77,11 @@ void QtCanvas::drawLine(int x1, int y1, int x2, int y2, int r, int g, int b, int
 	// Translate the rendering mode to Qt's composition mode.
 	painter.setCompositionMode(mapCompositionMode(blendMode));
 
-	painter.setPen(QPen(QColor(r, g, b, a)));
+	painter.setPen(QPen(QColor(r, g, b, a * 255.0)));
 	painter.drawLine(QLine(x1, y1, x2, y2));
 }
 
-void QtCanvas::drawLineBox(int x, int y, int w, int h, int r, int g, int b, int a, GraphicsService::BlendMode blendMode) {
+void QtCanvas::drawLineBox(int x, int y, int w, int h, int r, int g, int b, double a, GraphicsService::BlendMode blendMode) {
 	if (NULL == _qImage) return;
 
 	QPainter painter(_qImage);
@@ -89,18 +89,17 @@ void QtCanvas::drawLineBox(int x, int y, int w, int h, int r, int g, int b, int 
 	// Translate the rendering mode to Qt's composition mode.
 	painter.setCompositionMode(mapCompositionMode(blendMode));
 
-	painter.setPen(QPen(QColor(r, g, b, a)));
+	painter.setPen(QPen(QColor(r, g, b, a * 255.0)));
 	painter.drawRect(QRect(x, y, w, h));
 }
 
-void QtCanvas::fill(int r, int g, int b, int a) {
+void QtCanvas::fill(int r, int g, int b, double a) {
 	if (NULL == _qImage) return;
 
-	// @TODO Should we allow blending?
 	drawFilledBox(
 		0, 0, width(), height(),
-		r, g, b, a,
-		GraphicsService::BlendMode_Replace
+		r, g, b, a * 255.0,
+		GraphicsService::BlendMode_Blend
 	);
 }
 
