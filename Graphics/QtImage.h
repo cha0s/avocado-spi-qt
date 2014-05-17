@@ -7,7 +7,7 @@
 #include <QtGui/QPainter>
 #include <QtGui/QPaintEvent>
 #include <QtGui/QPixmap>
-#include <QtGui/QSlider>
+#include <QtWidgets/QSlider>
 
 #include "core/FS.h"
 #include "core/Graphics/Image.h"
